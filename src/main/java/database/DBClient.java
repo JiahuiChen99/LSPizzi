@@ -14,7 +14,7 @@ public final class DBClient {
     private String user = "root";
     private String psw = "root";
     private final String db_path = "jdbc:mysql://localhost:3306/pizzisalle";    // Localhost MySQL default port - pizzisalle DB
-    private static Connection connection;
+    private Connection connection;
 
     private static DBClient db_client;
 
@@ -76,5 +76,9 @@ public final class DBClient {
                 db_client = null;
             }
         }
+    }
+
+    public Connection getDBconn() {
+        return this.connection;
     }
 }
