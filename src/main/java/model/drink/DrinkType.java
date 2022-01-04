@@ -1,4 +1,4 @@
-package model.pizza.drink;
+package model.drink;
 
 /**
  * Enumeration defining the types of Drinks that a user can select from

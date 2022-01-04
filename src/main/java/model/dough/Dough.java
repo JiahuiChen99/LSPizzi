@@ -1,4 +1,4 @@
-package model.pizza.dough;
+package model.dough;
 
 public class Dough {
     private int ID;

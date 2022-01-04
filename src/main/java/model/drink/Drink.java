@@ -1,4 +1,4 @@
-package model.pizza.drink;
+package model.drink;
 
 public class Drink {
     private int ID;

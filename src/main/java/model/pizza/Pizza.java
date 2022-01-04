@@ -1,8 +1,8 @@
 package model.pizza;
 
-import model.pizza.dough.Dough;
-import model.pizza.ingredient.Ingredient;
-import model.pizza.ingredient.IngredientType;
+import model.dough.Dough;
+import model.ingredient.Ingredient;
+import model.ingredient.IngredientType;
 
 import java.util.HashMap;
 

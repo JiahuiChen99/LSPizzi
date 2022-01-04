@@ -1,4 +1,4 @@
-package model.pizza.ingredient;
+package model.ingredient;
 
 public enum IngredientType {
     HAM,

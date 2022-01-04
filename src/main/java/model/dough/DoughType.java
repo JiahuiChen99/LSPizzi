@@ -1,4 +1,4 @@
-package model.pizza.dough;
+package model.dough;
 
 /**
  * Enumeration defining the types of Dough for the pizza
