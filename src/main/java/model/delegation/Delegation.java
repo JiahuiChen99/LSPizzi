@@ -1,6 +1,6 @@
 package model.delegation;
 
-public class Delegation {
+public abstract class Delegation {
     private int ID;
     private String name;
 
@@ -8,6 +8,14 @@ public class Delegation {
         this.ID = ID;
         this.name = name;
     }
+
+    /**
+     * Abstract method that acts like an interface
+     * so that different delegations can have their
+     * own specialty pizza
+     * @return local pizza name
+     */
+    public abstract String getDelegationSpecialPizza();
 
     // Getters & Setters
 
