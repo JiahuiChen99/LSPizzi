@@ -3,12 +3,10 @@ package model.ingredient;
 public class Ingredient {
     private int ID;
     private String name;
-    private String description;
 
-    public Ingredient(int ID, String name, String description) {
+    public Ingredient(int ID, String name) {
         this.ID = ID;
         this.name = name;
-        this.description = description;
     }
 
     // Getters & Setters
@@ -28,11 +26,4 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
