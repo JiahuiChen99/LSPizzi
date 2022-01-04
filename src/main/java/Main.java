@@ -1,4 +1,6 @@
 import database.DBClient;
+import database.DBQueries;
+import model.LSPizzi;
 
 public class Main {
 
@@ -18,6 +20,15 @@ public class Main {
 
         // Get DB client singleton
         DBClient dbClient = DBClient.getConnection();
+        DBQueries dbQueries = new DBQueries(dbClient);
+
+        // Construct the whole model
+        LSPizzi lSpizzi = new LSPizzi(
+                dbQueries.getPizzas(),
+                dbQueries.getIngredients(),
+                dbQueries.getDoughs(),
+                dbQueries.getDrinks()
+        );
 
         // Close DB client singleton
         dbClient.closeConnection();
