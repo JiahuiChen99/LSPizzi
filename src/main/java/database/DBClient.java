@@ -10,7 +10,7 @@ import java.util.Objects;
  * DBClient represents the connection to the database
  * It uses the Singleton pattern
  */
-public class DBClient {
+public final class DBClient {
     private String user = "root";
     private String psw = "root";
     private final String db_path = "jdbc:mysql://localhost:3306/pizzisalle";    // Localhost MySQL default port - pizzisalle DB
@@ -19,7 +19,7 @@ public class DBClient {
     private static DBClient db_client;
 
     // Creates a MySQL connection
-    public DBClient() {
+    private DBClient() {
         // Load environment variables
         // For testing purposes 'user' & 'psw' are set directly
         // loadDBEnvironment();
@@ -55,7 +55,7 @@ public class DBClient {
      * if it's there's no instance
      * @return DBClient
      */
-    public DBClient getConnection() {
+    public static DBClient getConnection() {
         if ( db_client == null ) db_client = new DBClient();
 
         return db_client;
