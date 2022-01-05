@@ -4,6 +4,7 @@ import database.DBClient;
 import database.DBQueries;
 import model.LSPizzi;
 import model.delegation.Delegation;
+import model.delegation.DelegationFactory;
 import view.OrderForm;
 
 public class LSPizziController {
@@ -31,9 +32,21 @@ public class LSPizziController {
     }
 
     private void placeOrder() {
+        int order_steps = 1;
         Delegation delegation = null;
+        Customer customer = null;
 
-        String choice = this.orderForm.newOrder();
+        // Choose delegation to place an order
+        while ( order_steps == 1 ) {
+            int choice = Integer.parseInt(this.orderForm.newOrder());
+            if ( choice >= 1 && choice <= 3) order_steps++;
+            // Get the delegation
+            try {
+                delegation = DelegationFactory.getDelegation(choice);
+            } catch (ClassNotFoundException e) {
+                this.orderForm.error("Incorrect delegation");
+            }
+        }
 
     }
 }
