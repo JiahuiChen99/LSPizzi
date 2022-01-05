@@ -10,7 +10,7 @@ public class OrderForm {
         this.customerIput = new Scanner(System.in);
     }
 
-    private String customerChoice() {
+    public String customerChoice() {
         return this.customerIput.nextLine();
     }
 
@@ -50,5 +50,20 @@ public class OrderForm {
         System.out.println("###############################################");
 
         // TODO: Print drinks
+    }
+
+    public void customerForm() {
+        System.out.println("###############################################");
+        System.out.println("Fill Customer Information Form");
+        System.out.println("###############################################");
+    }
+
+    // Ask questions to user
+    public void showMessage(String question) {
+        System.out.println(question);
+    }
+
+    public void error(String error_message) {
+        System.out.println(error_message);
     }
 }
