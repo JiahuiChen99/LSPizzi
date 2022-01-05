@@ -27,7 +27,8 @@ public class Main {
                 dbQueries.getPizzas(),
                 dbQueries.getIngredients(),
                 dbQueries.getDoughs(),
-                dbQueries.getDrinks()
+                dbQueries.getDrinks(),
+                dbQueries.getDelegations()
         );
 
         // Close DB client singleton

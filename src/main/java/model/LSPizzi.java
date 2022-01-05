@@ -1,5 +1,6 @@
 package model;
 
+import model.delegation.Delegation;
 import model.dough.Dough;
 import model.drink.Drink;
 import model.ingredient.Ingredient;
@@ -16,12 +17,14 @@ public class LSPizzi {
     private List<Ingredient> ingredients;
     private List<Dough> doughs;
     private List<Drink> drinks;
+    private List<Delegation> delegations;
 
-    public LSPizzi(List<Pizza> pizzas, List<Ingredient> ingredients, List<Dough> doughs, List<Drink> drinks) {
+    public LSPizzi(List<Pizza> pizzas, List<Ingredient> ingredients, List<Dough> doughs, List<Drink> drinks, List<Delegation> delegations) {
         this.pizzas = pizzas;
         this.ingredients = ingredients;
         this.doughs = doughs;
         this.drinks = drinks;
+        this.delegations = delegations;
     }
 
     // Getters & Setters
@@ -55,5 +58,13 @@ public class LSPizzi {
 
     public void setDrinks(List<Drink> drinks) {
         this.drinks = drinks;
+    }
+
+    public List<Delegation> getDelegations() {
+        return delegations;
+    }
+
+    public void setDelegations(List<Delegation> delegations) {
+        this.delegations = delegations;
     }
 }

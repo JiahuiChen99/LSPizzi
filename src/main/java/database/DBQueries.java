@@ -1,5 +1,7 @@
 package database;
 
+import model.delegation.Delegation;
+import model.delegation.DelegationFactory;
 import model.dough.Dough;
 import model.drink.Drink;
 import model.ingredient.Ingredient;
@@ -89,5 +91,28 @@ public class DBQueries {
         }
 
         return drinks;
+    }
+
+    /**
+     * Get all the delegations from the DB
+     * The list of delegations is constructed with
+     * a factory method.
+     * Depending on the ID returned from the DB, this
+     * will be used to create the appropriate delegation
+     * @return list of delegations
+     */
+    public List<Delegation> getDelegations() {
+        List<Delegation> delegations = new ArrayList<>();
+        try {
+            ResultSet rs = this.dbClient.getDBconn().createStatement().executeQuery(this.getDrinks);
+            while ( rs.next() ) {
+                Delegation delegation = DelegationFactory.getDelegation(rs.getInt("id_delegation"));
+                delegations.add(delegation);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return delegations;
     }
 }
