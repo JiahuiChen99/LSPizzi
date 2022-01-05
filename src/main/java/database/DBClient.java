@@ -26,7 +26,9 @@ public final class DBClient {
 
         // Get a MySQL client connection
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            // Changed from com.mysql.jdbc.Driver
+            // Because the IDE said the old one was deprecated
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(this.db_path, this.user, this.psw);
             if ( connection == null ) System.exit(-1);
         } catch (SQLException | ClassNotFoundException e) {
