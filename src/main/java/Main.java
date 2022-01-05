@@ -20,6 +20,10 @@ public class Main {
      * - Factory Method: To use different constructors depending
      *      on the delegation
      * - Iterator: To iterate through different elements
+     * - State: I was torn between "Chain of responsibility" or
+     *      "State" behavioral design patterns, but finally chose
+     *      this one to manage the state of the customer information
+     *      input form
      */
     public static void main(String[] args) {
 
