@@ -26,7 +26,7 @@ public class OrderForm {
 
     public String delegations() {
         System.out.println("###############################################");
-        System.out.println("Create a new order");
+        System.out.println("Which restaurant");
         System.out.println("###############################################");
         System.out.println("First choose where you want to place the order (Delegation)");
         System.out.println("\t[1]. Barcelona");
