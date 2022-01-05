@@ -19,8 +19,8 @@ public class DBQueries {
     final String getPizzas = "SELECT * FROM Pizza";
     final String getDoughs = "SELECT * FROM Massa";
     final String getDrinks = "SELECT * FROM Drink";
-    final String getDelegations = "SELECT * FROM DELEGATION";
-    final String getIngredients = "";
+    final String getDelegations = "SELECT * FROM Delegation";
+    final String getIngredients = "SELECT * FROM Ingredient";
     final String getCustomerOrders = "";
 
     // Setters queries
