@@ -29,10 +29,10 @@ public class OrderForm {
         System.out.println("Which restaurant");
         System.out.println("###############################################");
         System.out.println("First choose where you want to place the order (Delegation)");
-        System.out.println("\t[1]. Barcelona");
-        System.out.println("\t[2]. Lleida");
-        System.out.println("\t[3]. Tarragona");
-        System.out.println("\t[4]. Girona");
+        System.out.println("\t[1]- Barcelona");
+        System.out.println("\t[2]- Lleida");
+        System.out.println("\t[3]- Tarragona");
+        System.out.println("\t[4]- Girona");
         return customerChoice();
     }
 
