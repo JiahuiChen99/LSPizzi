@@ -39,7 +39,7 @@ public class LSPizziController {
 
         // Choose delegation to place an order
         while ( order_steps == 1 ) {
-            int choice = Integer.parseInt(this.orderForm.newOrder());
+            int choice = Integer.parseInt(this.orderForm.delegations());
             if ( choice >= 1 && choice <= 3) order_steps++;
             // Get the delegation
             try {

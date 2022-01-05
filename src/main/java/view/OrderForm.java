@@ -24,7 +24,7 @@ public class OrderForm {
         return customerChoice();
     }
 
-    public String newOrder() {
+    public String delegations() {
         System.out.println("###############################################");
         System.out.println("Create a new order");
         System.out.println("###############################################");
