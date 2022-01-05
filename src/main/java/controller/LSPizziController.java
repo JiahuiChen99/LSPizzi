@@ -1,6 +1,5 @@
 package controller;
 
-import database.DBClient;
 import database.DBQueries;
 import model.Customer;
 import model.LSPizzi;
@@ -55,6 +54,15 @@ public class LSPizziController {
             CustomerForm customerForm = new CustomerForm(orderForm);
             customer = customerForm.getCustomerData();
             order_steps++;
+        }
+
+        // New order
+        while ( order_steps == 3 ) {
+            // Exit program
+            if ( Integer.parseInt(this.orderForm.newOrder()) == 4) break;
+
+            // Store order
+
         }
     }
 }
