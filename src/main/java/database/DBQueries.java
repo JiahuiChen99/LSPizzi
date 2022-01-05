@@ -38,8 +38,8 @@ public class DBQueries {
         try {
             ResultSet rs = this.dbClient.getDBconn().createStatement().executeQuery(this.getPizzas);
             while ( rs.next() ) {
-                Pizza pizza = new Pizza(rs.getInt("id_pizza"), rs.getString("name"));
-                pizzas.add(pizza);
+                /*Pizza pizza = new Pizza(rs.getInt("id_pizza"), rs.getString("name"));
+                pizzas.add(pizza);*/
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -104,7 +104,7 @@ public class DBQueries {
     public List<Delegation> getDelegations() {
         List<Delegation> delegations = new ArrayList<>();
         try {
-            ResultSet rs = this.dbClient.getDBconn().createStatement().executeQuery(this.getDrinks);
+            ResultSet rs = this.dbClient.getDBconn().createStatement().executeQuery(this.getDelegations);
             while ( rs.next() ) {
                 Delegation delegation = DelegationFactory.getDelegation(rs.getInt("id_delegation"));
                 delegations.add(delegation);
