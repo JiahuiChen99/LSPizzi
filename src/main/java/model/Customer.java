@@ -10,6 +10,9 @@ public class Customer {
     private String city;
     private boolean vip;   // For customers who have ordered more than one time
 
+    public Customer() {
+    }
+
     public Customer(int ID, String name, String surname_1, String surname_2, String phone, String address, String city, boolean vip) {
         this.ID = ID;
         this.name = name;
