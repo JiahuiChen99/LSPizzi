@@ -2,18 +2,21 @@ package model.pizza;
 
 import model.dough.Dough;
 import model.ingredient.Ingredient;
-import model.ingredient.IngredientType;
-
-import java.util.HashMap;
+import java.util.List;
 
 public class Pizza {
     private int ID;
     private String name;
     private Dough dough;
-    private HashMap<Enum<IngredientType>, Ingredient> ingredients;
-    private HashMap<Enum<IngredientType>, Ingredient> extras;
+    private List<Ingredient> ingredients;
+    private List<Ingredient> extras;
 
-    public Pizza(int ID, String name, Dough dough, HashMap<Enum<IngredientType>, Ingredient> ingredients, HashMap<Enum<IngredientType>, Ingredient> extras) {
+    public Pizza(int ID, String name) {
+        this.ID = ID;
+        this.name = name;
+    }
+
+    public Pizza(int ID, String name, Dough dough, List<Ingredient> ingredients, List<Ingredient> extras) {
         this.ID = ID;
         this.name = name;
         this.dough = dough;
@@ -46,19 +49,19 @@ public class Pizza {
         this.dough = dough;
     }
 
-    public HashMap<Enum<IngredientType>, Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(HashMap<Enum<IngredientType>, Ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public HashMap<Enum<IngredientType>, Ingredient> getExtras() {
+    public List<Ingredient> getExtras() {
         return extras;
     }
 
-    public void setExtras(HashMap<Enum<IngredientType>, Ingredient> extras) {
+    public void setExtras(List<Ingredient> extras) {
         this.extras = extras;
     }
 }
