@@ -2,6 +2,7 @@ package controller;
 
 import database.DBClient;
 import database.DBQueries;
+import model.Customer;
 import model.LSPizzi;
 import model.delegation.Delegation;
 import model.delegation.DelegationFactory;
@@ -48,5 +49,12 @@ public class LSPizziController {
             }
         }
 
+        // Fill customer information form
+        while ( order_steps == 2) {
+            this.orderForm.customerForm();
+            CustomerForm customerForm = new CustomerForm(orderForm);
+            customer = customerForm.getCustomerData();
+            order_steps++;
+        }
     }
 }
