@@ -10,14 +10,15 @@ package model.delegation;
  */
 public class DelegationFactory {
     public static Delegation getDelegation( int place ) throws ClassNotFoundException {
+        Delegation delegation = null;
         switch ( place ) {
-            case 1 -> new Barcelona(1, DelegationType.BARCELONA.name());
-            case 2 -> new Lleida(2, DelegationType.LLEIDA.name());
-            case 3 -> new Tarragona(3, DelegationType.TARRAGONA.name());
-            case 4 -> new Girona(4, DelegationType.GIRONA.name());
+            case 1 -> delegation = new Barcelona(1, DelegationType.BARCELONA.name());
+            case 2 -> delegation = new Lleida(2, DelegationType.LLEIDA.name());
+            case 3 -> delegation = new Tarragona(3, DelegationType.TARRAGONA.name());
+            case 4 -> delegation = new Girona(4, DelegationType.GIRONA.name());
             default->
                 throw new ClassNotFoundException();
         }
-        throw  new ClassNotFoundException();
+        return delegation;
     }
 }
