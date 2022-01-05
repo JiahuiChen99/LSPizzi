@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DBQueries {
@@ -49,7 +50,10 @@ public class DBQueries {
         }
 
         // Get ingredients for all every pizza
-        for (Pizza pizza: pizzas) {
+        // Using Iterator pattern
+        Iterator<Pizza> pizza_iterator = pizzas.iterator();
+        while (pizza_iterator.hasNext()){
+            Pizza pizza = (Pizza)pizza_iterator.next();
             pizza.setIngredients(getPizzasIngredients(pizza.getID()));
         }
 
