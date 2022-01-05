@@ -1,6 +1,8 @@
+import controller.LSPizziController;
 import database.DBClient;
 import database.DBQueries;
 import model.LSPizzi;
+import view.OrderForm;
 
 public class Main {
 
@@ -11,10 +13,13 @@ public class Main {
      * This project implements the following software design
      * patterns:
      *
-     * - MVC: The application itself uses this pattern abstract
+     * - MVC: The application itself uses this pattern to abstract
      *      different layers.
      * - Singleton: For the DB client, one and only instance
      * - Builder: To customize and build the pizza.
+     * - Factory Method: To use different constructors depending
+     *      on the delegation
+     * - Iterator: To iterate through different elements
      */
     public static void main(String[] args) {
 
@@ -30,6 +35,19 @@ public class Main {
                 dbQueries.getDrinks(),
                 dbQueries.getDelegations()
         );
+
+        // Construct the whole view
+        OrderForm orderForm = new OrderForm();
+
+        // Construct and map the controller with the model & view
+        LSPizziController lsPizziController = new LSPizziController(
+                lSpizzi,
+                orderForm,
+                dbQueries
+        );
+
+        // Run the restaurant
+        lsPizziController.runPizzi();
 
         // Close DB client singleton
         dbClient.closeConnection();
