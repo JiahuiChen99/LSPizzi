@@ -36,6 +36,18 @@ public class OrderForm {
         return customerChoice();
     }
 
+    public String newOrder() {
+        System.out.println("###############################################");
+        System.out.println("Create a new order");
+        System.out.println("###############################################");
+        System.out.println("Select a product");
+        System.out.println("\t[1]- Add Pizza");
+        System.out.println("\t[2]- Add Soft Drink");
+        System.out.println("\t[3]- Place order");
+        System.out.println("\t[4]- Exit");
+        return customerChoice();
+    }
+
     public void doughs() {
         System.out.println("###############################################");
         System.out.println("Available doughs");
