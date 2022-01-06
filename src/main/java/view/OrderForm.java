@@ -1,5 +1,9 @@
 package view;
 
+import model.dough.Dough;
+import model.drink.Drink;
+import model.pizza.Pizza;
+import java.util.List;
 import java.util.Scanner;
 
 public class OrderForm {
@@ -48,20 +52,25 @@ public class OrderForm {
         return customerChoice();
     }
 
-    public void doughs() {
-        System.out.println("###############################################");
-        System.out.println("Available doughs");
-        System.out.println("###############################################");
-
-        // TODO: Print doughs
+    public void pizzas(List<Pizza> pizzas) {
+        System.out.println("> Available pizzas");
+        pizzas.forEach( pizza -> {
+            System.out.println("\t[" + pizza.getID() + "]- " + pizza.getName() + " " + pizza.getFormattedIngredients());
+        });
     }
 
-    public void drinks() {
-        System.out.println("###############################################");
-        System.out.println("Available drinks");
-        System.out.println("###############################################");
+    public void doughs(List<Dough> doughs) {
+        System.out.println("> Available doughs");
+        doughs.forEach( dough -> {
+            System.out.println("\t[" + dough.getID() + "]- " + dough.getName());
+        });
+    }
 
-        // TODO: Print drinks
+    public void drinks(List<Drink> drinks) {
+        System.out.println("> Available drinks");
+        drinks.forEach( drink -> {
+            System.out.println("\t[" + drink.getID() + "]- " + drink.getName());
+        });
     }
 
     public void customerForm() {
