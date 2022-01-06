@@ -11,6 +11,10 @@ public class Pizza {
     private List<Ingredient> ingredients;
     private List<Ingredient> extras;
 
+    public Pizza() {
+
+    }
+
     public Pizza(int ID, String name) {
         this.ID = ID;
         this.name = name;

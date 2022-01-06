@@ -9,6 +9,7 @@ import model.dough.Dough;
 import model.drink.Drink;
 import model.ingredient.Ingredient;
 import model.pizza.Pizza;
+import model.pizza.PizzaBuilder;
 import view.OrderForm;
 
 import java.util.*;
@@ -87,7 +88,7 @@ public class LSPizziController {
             return;
         }
 
-        Pizza chosen_pizza = null;
+        PizzaBuilder pizzaBuilder = new PizzaBuilder();
         int choice = -1;
         // Choose pizza
         while ( choice <= 0 || choice >= 25 ){
@@ -113,7 +114,7 @@ public class LSPizziController {
             } else if ( choice <= 0 || choice >= 25 ) {
                 this.orderForm.error("Choose from the available ones");
             } else {
-                 chosen_pizza = new Pizza(choice);
+                 pizzaBuilder.setPizzaID(choice);
             }
         }
 
@@ -122,7 +123,7 @@ public class LSPizziController {
         while (choice <= 0 || choice >= 4) {
             choice = Integer.parseInt(this.orderForm.doughs(this.lsPizzi.getDoughs()));
         }
-        chosen_pizza.setDough(new Dough(choice));
+        pizzaBuilder.chooseDough(new Dough(choice));
 
         HashMap<Integer, Integer> chosen_extras = new HashMap<>();
 
@@ -162,10 +163,10 @@ public class LSPizziController {
         chosen_extras.forEach((extra, quantity) -> {
             list_extras.add(new Ingredient(extra, quantity));
         });
-        chosen_pizza.setExtras(list_extras);
+        pizzaBuilder.addExtra(list_extras);
 
         // Add pizza to order
-        customer_pizzas.add(chosen_pizza);
+        customer_pizzas.add(pizzaBuilder.build());
     }
 
     public void selectDrink(ArrayList<Drink> customer_drinks) {
