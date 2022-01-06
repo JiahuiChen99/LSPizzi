@@ -53,6 +53,20 @@ public class Pizza {
         return ingredients;
     }
 
+    /**
+     * Get formatted ingredients
+     * @return formatted string
+     */
+    public String getFormattedIngredients() {
+        StringBuilder formatted_ingredients = new StringBuilder();
+        formatted_ingredients.append("{ ");
+        for (Ingredient ingredient : ingredients) {
+            formatted_ingredients.append(ingredient.getName()).append(",");
+        }
+        formatted_ingredients.append(" }");
+        return formatted_ingredients.toString();
+    }
+
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
