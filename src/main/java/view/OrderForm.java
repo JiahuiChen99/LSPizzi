@@ -2,6 +2,7 @@ package view;
 
 import model.dough.Dough;
 import model.drink.Drink;
+import model.ingredient.Ingredient;
 import model.pizza.Pizza;
 import java.util.List;
 import java.util.Scanner;
@@ -73,6 +74,21 @@ public class OrderForm {
         drinks.forEach( drink -> {
             System.out.println("\t[" + drink.getID() + "]- " + drink.getName());
         });
+        return customerChoice();
+    }
+
+    public String extras(List<Ingredient> extras) {
+        System.out.println("> Available extras");
+        extras.forEach( extra -> {
+            System.out.println("\t[" + extra.getID() + "]- " + extra.getName());
+        });
+        return customerChoice();
+    }
+
+    public String wantExtra() {
+        System.out.println("> Want extra ingredient?");
+        System.out.println("\t[1]- Yes");
+        System.out.println("\t[2]- No");
         return customerChoice();
     }
 
