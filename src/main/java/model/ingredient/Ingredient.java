@@ -3,10 +3,16 @@ package model.ingredient;
 public class Ingredient {
     private int ID;
     private String name;
+    private int quantity;
 
     public Ingredient(int ID, String name) {
         this.ID = ID;
         this.name = name;
+    }
+
+    public Ingredient(int ID, int quantity) {
+        this.ID = ID;
+        this.quantity = quantity;
     }
 
     // Getters & Setters
