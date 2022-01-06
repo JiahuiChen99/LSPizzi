@@ -58,11 +58,28 @@ public class LSPizziController {
 
         // New order
         while ( order_steps == 3 ) {
-            // Exit program
-            if ( Integer.parseInt(this.orderForm.newOrder()) == 4) break;
-
-            // Store order
-
+            switch ( Integer.parseInt(this.orderForm.newOrder()) ) {
+                case 1 -> selectPizza();
+                case 2 -> selectDrink();
+                // Store order
+                case 3 -> System.out.println("Storing data");
+                // Exit program
+                case 4 -> order_steps++;
+                // Not valid option
+                default -> System.out.println("Incorrect selection");
+            }
         }
+    }
+
+    public void selectPizza() {
+        // Choose pizza
+        this.orderForm.pizzas(this.lsPizzi.getPizzas());
+
+        // Choose dough type
+        this.orderForm.doughs(this.lsPizzi.getDoughs());
+    }
+
+    public void selectDrink() {
+        this.orderForm.drinks(this.lsPizzi.getDrinks());
     }
 }
