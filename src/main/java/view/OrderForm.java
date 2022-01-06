@@ -52,25 +52,28 @@ public class OrderForm {
         return customerChoice();
     }
 
-    public void pizzas(List<Pizza> pizzas) {
+    public String pizzas(List<Pizza> pizzas) {
         System.out.println("> Available pizzas");
         pizzas.forEach( pizza -> {
             System.out.println("\t[" + pizza.getID() + "]- " + pizza.getName() + " " + pizza.getFormattedIngredients());
         });
+        return customerChoice();
     }
 
-    public void doughs(List<Dough> doughs) {
+    public String doughs(List<Dough> doughs) {
         System.out.println("> Available doughs");
         doughs.forEach( dough -> {
             System.out.println("\t[" + dough.getID() + "]- " + dough.getName());
         });
+        return customerChoice();
     }
 
-    public void drinks(List<Drink> drinks) {
+    public String drinks(List<Drink> drinks) {
         System.out.println("> Available drinks");
         drinks.forEach( drink -> {
             System.out.println("\t[" + drink.getID() + "]- " + drink.getName());
         });
+        return customerChoice();
     }
 
     public void customerForm() {
