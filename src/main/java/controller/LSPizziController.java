@@ -71,7 +71,7 @@ public class LSPizziController {
                 case 1 -> selectPizza(customer_pizzas, delegation);
                 case 2 -> selectDrink(customer_drinks);
                 // Store order
-                case 3 -> System.out.println("Storing data");
+                case 3 -> saveOrder(delegation, customer, customer_pizzas, customer_drinks);
                 // Exit program
                 case 4 -> order_steps++;
                 // Not valid option
@@ -122,7 +122,7 @@ public class LSPizziController {
         while (choice <= 0 || choice >= 4) {
             choice = Integer.parseInt(this.orderForm.doughs(this.lsPizzi.getDoughs()));
         }
-        chosen_pizza.setDough(new Dough(1));
+        chosen_pizza.setDough(new Dough(choice));
 
         HashMap<Integer, Integer> chosen_extras = new HashMap<>();
 
@@ -184,5 +184,12 @@ public class LSPizziController {
         }
 
         customer_drinks.add(new Drink(drink));
+    }
+
+    private void saveOrder(Delegation delegation, Customer customer, ArrayList<Pizza> customer_pizzas,ArrayList<Drink> customer_drinks) {
+        // Save customer data
+        this.dbQueries.setClient(customer);
+        // Save customer order
+        this.dbQueries.setOrder(delegation, customer, customer_pizzas, customer_drinks);
     }
 }

@@ -1,5 +1,6 @@
 package database;
 
+import model.Customer;
 import model.delegation.Delegation;
 import model.delegation.DelegationFactory;
 import model.dough.Dough;
@@ -10,6 +11,7 @@ import model.pizza.Pizza;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -150,5 +152,69 @@ public class DBQueries {
         }
 
         return delegations;
+    }
+
+    /**
+     * Stores the client data
+     */
+    public void setClient(Customer customer) {
+        try {
+            PreparedStatement ps = this.dbClient.getDBconn()
+                    .prepareStatement(this.setCustomer, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, customer.getName());
+            ps.setString(2, customer.getSurname_1());
+            ps.setString(3, customer.getSurname_2());
+            ps.setString(4, customer.getPhone());
+            ps.setString(5, customer.getAddress());
+            ps.setString(6, customer.getCity());
+            int rs = ps.executeUpdate();
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                customer.setID(generatedKeys.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Stores the client's order
+     */
+    public void setOrder(Delegation delegation, Customer customer, ArrayList<Pizza> customer_pizzas, ArrayList<Drink> customer_drinks) {
+        try {
+            // Add to COrder customerID - delegationID
+            PreparedStatement ps = this.dbClient.getDBconn()
+                    .prepareStatement(this.setCustomerOrder);
+            ps.setInt(1, customer.getID());
+            ps.setInt(2, delegation.getID());
+            int rs = ps.executeUpdate();
+
+
+            // Add pizzas
+            for ( Pizza pizza: customer_pizzas ) {
+                ps = this.dbClient.getDBconn()
+                        .prepareStatement(this.setPizza);
+                ps.setInt(1, pizza.getID());
+                ps.setInt(2, pizza.getDough().getID());
+                ps.setString(3, pizza.getFormattedExtras());
+                // Fake Order ID
+                // This could be improved and check if it's
+                // a usual customer by checking the telephone number
+                // This could crash if there's no ID 1, so ensure there's one
+                ps.setInt(4, 1);
+                rs = ps.executeUpdate();
+            }
+
+            for ( Drink drink: customer_drinks ) {
+                ps = this.dbClient.getDBconn()
+                        .prepareStatement(this.setDrink);
+                ps.setInt(1, drink.getID());
+                ps.setInt(2, drink.getID());
+                rs = ps.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
