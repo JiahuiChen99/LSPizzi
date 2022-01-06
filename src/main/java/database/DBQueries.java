@@ -28,8 +28,10 @@ public class DBQueries {
             " INNER JOIN PizzaItem ON Ingredient.id_ingredient=PizzaItem.id_ingredient AND PizzaItem.id_pizza=?";
 
     // Setters queries
-    final String setCustomer = "";
-    final String setOrder = "";
+    final String setCustomer = "INSERT INTO Customer (name, surname1, surname2, phone_number, address, city) VALUES (?,?,?,?,?,?)";
+    final String setCustomerOrder = "INSERT INTO COrder(id_customer, id_delegation) VALUES (?,?)";
+    final String setPizza = "INSERT INTO OrderItem (id_pizza, id_massa, extra, id_order) VALUES (?,?,?,?)";
+    final String setDrink = "INSERT INTO OrderItem (id_drink, id_order) VALUES (?,?)";
 
     // Bind the DB client singleton
     public DBQueries(DBClient dbClient) {
