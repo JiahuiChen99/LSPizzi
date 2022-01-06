@@ -71,6 +71,16 @@ public class Pizza {
         return formatted_ingredients.toString();
     }
 
+    public String getFormattedExtras() {
+        StringBuilder formatted_extras = new StringBuilder();
+        formatted_extras.append("{ ");
+        for (Ingredient extra : extras) {
+            formatted_extras.append(extra.getID()).append("-").append(extra.getQuantity()).append(", ");
+        }
+        formatted_extras.append(" }");
+        return formatted_extras.toString();
+    }
+
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
