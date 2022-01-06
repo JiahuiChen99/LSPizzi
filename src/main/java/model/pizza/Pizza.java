@@ -16,6 +16,10 @@ public class Pizza {
         this.name = name;
     }
 
+    public Pizza(int ID) {
+        this.ID = ID;
+    }
+
     public Pizza(int ID, String name, Dough dough, List<Ingredient> ingredients, List<Ingredient> extras) {
         this.ID = ID;
         this.name = name;
