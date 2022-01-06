@@ -15,7 +15,7 @@ public abstract class Delegation {
      * own specialty pizza
      * @return local pizza name
      */
-    public abstract String getDelegationSpecialPizza();
+    public abstract int getDelegationSpecialPizza();
 
     // Getters & Setters
 

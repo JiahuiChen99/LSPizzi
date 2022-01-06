@@ -7,7 +7,7 @@ public class Tarragona extends Delegation {
     }
 
     @Override
-    public String getDelegationSpecialPizza() {
-        return "Tarragona";
+    public int getDelegationSpecialPizza() {
+        return 20;  // "Tarragona" pizza
     }
 }
