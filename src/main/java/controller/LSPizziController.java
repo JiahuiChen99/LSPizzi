@@ -5,6 +5,7 @@ import model.Customer;
 import model.LSPizzi;
 import model.delegation.Delegation;
 import model.delegation.DelegationFactory;
+import model.drink.Drink;
 import model.pizza.Pizza;
 import view.OrderForm;
 
@@ -40,6 +41,7 @@ public class LSPizziController {
         Delegation delegation = null;
         Customer customer = null;
         ArrayList<Pizza> customer_pizzas = new ArrayList<>();
+        ArrayList<Drink> customer_drinks = new ArrayList<>();
 
         // Choose delegation to place an order
         while ( order_steps == 1 ) {
@@ -65,7 +67,7 @@ public class LSPizziController {
         while ( order_steps == 3 ) {
             switch ( Integer.parseInt(this.orderForm.newOrder()) ) {
                 case 1 -> selectPizza(customer_pizzas);
-                case 2 -> selectDrink();
+                case 2 -> selectDrink(customer_drinks);
                 // Store order
                 case 3 -> System.out.println("Storing data");
                 // Exit program
@@ -78,7 +80,7 @@ public class LSPizziController {
 
     public void selectPizza(ArrayList<Pizza> customer_pizzas) {
         // Check if the client has already chosen 10 pizzas
-        if ( customer_pizzas.size() < 10 ) {
+        if ( customer_pizzas.size() >= 10 ) {
             System.out.println("You've already chosen 10 pizzas!");
             return;
         }
@@ -90,7 +92,11 @@ public class LSPizziController {
         this.orderForm.doughs(this.lsPizzi.getDoughs());
     }
 
-    public void selectDrink() {
+    public void selectDrink(ArrayList<Drink> customer_drinks) {
+        if ( customer_drinks.size() >= 10 ) {
+            System.out.println("You've already chosen 10 drinks!");
+            return;
+        }
         this.orderForm.drinks(this.lsPizzi.getDrinks());
     }
 }
