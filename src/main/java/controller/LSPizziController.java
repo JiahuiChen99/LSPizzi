@@ -5,17 +5,19 @@ import model.Customer;
 import model.LSPizzi;
 import model.delegation.Delegation;
 import model.delegation.DelegationFactory;
+import model.dough.Dough;
 import model.drink.Drink;
+import model.ingredient.Ingredient;
 import model.pizza.Pizza;
 import view.OrderForm;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LSPizziController {
     private LSPizzi lsPizzi;
     private OrderForm orderForm;
     private DBQueries dbQueries;
+    private Set<Integer> special_pizzas_ID = new HashSet<Integer>(Arrays.asList(18,19,20,21));
 
     public LSPizziController(LSPizzi lsPizzi, OrderForm orderForm, DBQueries dbQueries) {
         this.lsPizzi = lsPizzi;
@@ -66,7 +68,7 @@ public class LSPizziController {
         // New order
         while ( order_steps == 3 ) {
             switch ( Integer.parseInt(this.orderForm.newOrder()) ) {
-                case 1 -> selectPizza(customer_pizzas);
+                case 1 -> selectPizza(customer_pizzas, delegation);
                 case 2 -> selectDrink(customer_drinks);
                 // Store order
                 case 3 -> System.out.println("Storing data");
@@ -78,18 +80,92 @@ public class LSPizziController {
         }
     }
 
-    public void selectPizza(ArrayList<Pizza> customer_pizzas) {
+    public void selectPizza(ArrayList<Pizza> customer_pizzas, Delegation delegation) {
         // Check if the client has already chosen 10 pizzas
         if ( customer_pizzas.size() >= 10 ) {
             System.out.println("You've already chosen 10 pizzas!");
             return;
         }
 
+        Pizza chosen_pizza = null;
+        int choice = -1;
         // Choose pizza
-        this.orderForm.pizzas(this.lsPizzi.getPizzas());
+        while ( choice <= 0 || choice >= 25 ){
+            // Delete other delegation's pizzas;
+            ArrayList<Pizza> availabe_pizzas = (ArrayList<Pizza>) this.lsPizzi.getPizzas();
 
+            Iterator<Pizza> it = availabe_pizzas.iterator();
+            int this_delegation_pizza = delegation.getDelegationSpecialPizza();
+
+            // Remove by ID and maintain the delegation pizza
+            while (it.hasNext()) {
+                int pizza_id = it.next().getID();
+                if ( special_pizzas_ID.contains(pizza_id)
+                        && pizza_id != this_delegation_pizza ) {
+                    it.remove();
+                }
+            }
+
+            choice = Integer.parseInt(this.orderForm.pizzas(availabe_pizzas));
+            if ( special_pizzas_ID.contains(choice) && choice != this_delegation_pizza ) {
+                this.orderForm.error("Not an available pizza in your delegation");
+                choice = -1;
+            } else if ( choice <= 0 || choice >= 25 ) {
+                this.orderForm.error("Choose from the available ones");
+            } else {
+                 chosen_pizza = new Pizza(choice);
+            }
+        }
+
+        choice = -1;
         // Choose dough type
-        this.orderForm.doughs(this.lsPizzi.getDoughs());
+        while (choice <= 0 || choice >= 4) {
+            choice = Integer.parseInt(this.orderForm.doughs(this.lsPizzi.getDoughs()));
+        }
+        chosen_pizza.setDough(new Dough(1));
+
+        HashMap<Integer, Integer> chosen_extras = new HashMap<>();
+
+        choice = -1;
+        // Ask for Extras
+        while (choice <= 0 || choice >= 3) {
+            choice = Integer.parseInt(this.orderForm.wantExtra());
+            if ( choice == 1) {
+                int choice2 = -1;
+                while (choice2 <= 0 || choice2 >= 34) {
+                     choice2 = Integer.parseInt(this.orderForm.extras(this.lsPizzi.getIngredients()));
+                }
+
+                // Search if the customer has chosen before
+                Integer quantity = chosen_extras.get(choice2);
+                if (quantity == null) quantity = 0;
+                if ( quantity == 10 ) {
+                    this.orderForm.error("Reached maximum of 10 elements for this ingredient");
+                } else {
+                    // Choose quantity
+                    int q = -1;
+                    while ( q <= 0 || q >= (10 - quantity) + 1) {
+                        this.orderForm.showMessage("Available quantity [1 - " + (10 - quantity) + "]");
+                        q = Integer.parseInt(this.orderForm.customerChoice());
+                    }
+
+                    // Add element
+                    chosen_extras.put(choice2, q + quantity);
+                }
+                // Let the customer add another ingredient if she/he wants
+                choice = -1;
+            }
+        }
+
+        // Save the extras to the pizza
+        ArrayList<Ingredient> list_extras = new ArrayList<>();
+        chosen_extras.forEach((extra, quantity) -> {
+            list_extras.add(new Ingredient(extra, quantity));
+        });
+        chosen_pizza.setExtras(list_extras);
+
+        // Add pizza to order
+        customer_pizzas.add(chosen_pizza);
     }
 
     public void selectDrink(ArrayList<Drink> customer_drinks) {
