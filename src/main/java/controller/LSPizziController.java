@@ -173,6 +173,16 @@ public class LSPizziController {
             System.out.println("You've already chosen 10 drinks!");
             return;
         }
-        this.orderForm.drinks(this.lsPizzi.getDrinks());
+        int drink = -1;
+        // Check legal age for alcoholic drinks
+        int age = Integer.parseInt(this.orderForm.legalAge());
+        while (drink <= 0 || drink >= 4 || (age <= 17 && drink == 3) ) {
+            drink = Integer.parseInt(this.orderForm.drinks(this.lsPizzi.getDrinks()));
+            if ((age <= 17 && drink == 3)) {
+                System.out.println("You're underage, choose a non-alcoholic drink!");
+            }
+        }
+
+        customer_drinks.add(new Drink(drink));
     }
 }

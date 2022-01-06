@@ -69,6 +69,11 @@ public class OrderForm {
         return customerChoice();
     }
 
+    public String legalAge() {
+        System.out.println("> What's your age:");
+        return customerChoice();
+    }
+
     public String drinks(List<Drink> drinks) {
         System.out.println("> Available drinks");
         drinks.forEach( drink -> {
