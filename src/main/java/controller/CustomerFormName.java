@@ -27,8 +27,8 @@ public class CustomerFormName extends CustomerFormState{
 
         // Store the customer data
         this.customerForm.getCustomerData().setName(customer_name);
-        this.customerForm.getCustomerData().setSurname_1(customer_name);
-        this.customerForm.getCustomerData().setSurname_2(customer_name);
+        this.customerForm.getCustomerData().setSurname_1(customer_surname1);
+        this.customerForm.getCustomerData().setSurname_2(customer_surname2);
 
         // Change state and ask next question
         this.customerForm.nextQuestion(
