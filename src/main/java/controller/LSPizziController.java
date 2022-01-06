@@ -5,7 +5,11 @@ import model.Customer;
 import model.LSPizzi;
 import model.delegation.Delegation;
 import model.delegation.DelegationFactory;
+import model.pizza.Pizza;
 import view.OrderForm;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LSPizziController {
     private LSPizzi lsPizzi;
@@ -35,6 +39,7 @@ public class LSPizziController {
         int order_steps = 1;
         Delegation delegation = null;
         Customer customer = null;
+        ArrayList<Pizza> customer_pizzas = new ArrayList<>();
 
         // Choose delegation to place an order
         while ( order_steps == 1 ) {
@@ -59,7 +64,7 @@ public class LSPizziController {
         // New order
         while ( order_steps == 3 ) {
             switch ( Integer.parseInt(this.orderForm.newOrder()) ) {
-                case 1 -> selectPizza();
+                case 1 -> selectPizza(customer_pizzas);
                 case 2 -> selectDrink();
                 // Store order
                 case 3 -> System.out.println("Storing data");
@@ -71,7 +76,13 @@ public class LSPizziController {
         }
     }
 
-    public void selectPizza() {
+    public void selectPizza(ArrayList<Pizza> customer_pizzas) {
+        // Check if the client has already chosen 10 pizzas
+        if ( customer_pizzas.size() < 10 ) {
+            System.out.println("You've already chosen 10 pizzas!");
+            return;
+        }
+
         // Choose pizza
         this.orderForm.pizzas(this.lsPizzi.getPizzas());
 
